@@ -5,3 +5,10 @@ The Libraries used in this project are :-
 * Allegro 5 (for GUI)
 * zip (for the zip manupulation)
 - conio (for now only, will be eliminated in the future)
+
+# Compile Instructions
+
+If you are using GCC compiler then use 
+```
+g++ -o filename main.cpp libzip.dll.a conio.o
+```
