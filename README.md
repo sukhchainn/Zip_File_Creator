@@ -15,6 +15,17 @@ g++ -o filename main.cpp libzip.dll.a conio.o
 
 Screen Shots :-
 
+##When Menu is not clicked
+
 ![alt text](https://d1cxvcw9gjxu2x.cloudfront.net/attachments/611995 "With menu unchecked")
+
+
+
+
+
+
+
+
+##When Menu is clicked
 
 ![alt text](https://d1cxvcw9gjxu2x.cloudfront.net/attachments/611996 "With menu checked")
