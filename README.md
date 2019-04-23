@@ -19,13 +19,14 @@ Screen Shots :-
 
 ![alt text](https://d1cxvcw9gjxu2x.cloudfront.net/attachments/611995 "With menu unchecked")
 
-
-
-
-
-
-
-
 ## When Menu is clicked
 
 ![alt text](https://d1cxvcw9gjxu2x.cloudfront.net/attachments/611996 "With menu checked")
+
+## Update with list_box
+
+![alt text](https://d1cxvcw9gjxu2x.cloudfront.net/attachments/611998 "With menu checked")
+
+## Update with list_box and Menu clicked
+
+![alt text](https://d1cxvcw9gjxu2x.cloud-front.net/attachments/611999 "With menu checked")
