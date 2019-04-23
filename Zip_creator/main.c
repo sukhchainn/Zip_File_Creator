@@ -7,6 +7,7 @@
 #include <allegro5/mouse.h>
 
 void menu_icon(int, int, int, int, ALLEGRO_COLOR, int);
+void list_box();
 
 #define MAXWIDTH 800
 #define MAXHEIGHT 600
@@ -61,10 +62,11 @@ int main()
         al_draw_filled_rectangle(0, 50, 50, MAXHEIGHT, al_map_rgb(255, 214, 51)); //rgb(218, 112, 214) rgb(255, 214, 51) al_map_rgb(230, 46, 0)
         al_draw_line(50, 0, 50, MAXHEIGHT, al_map_rgb(0, 0, 0), 1);
         menu_icon(50, 50, 25, 25, al_map_rgb(0, 0, 0), animate);
+        list_box();
 
         if(menu)
         {
-            al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(140, 152, 63));
+            al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(22, 88, 110));
         }
 
         al_flip_display();
@@ -111,4 +113,17 @@ void menu_icon(int width, int height, int place_x, int place_y, ALLEGRO_COLOR co
     al_draw_line(place_x-(width/2)+width/4 + animate, place_y-(height/2)+height/3, place_x-(width/2)+width-(width/4) + animate, place_y-(height/2)+height/3, colorU, 5);
     al_draw_line(place_x-(width/2)+width/4 - animate, place_y-(height/2)+(height/2), place_x-(width/2)+width-(width/4) - animate, place_y-(height/2)+(height/2), colorU, 5);
     al_draw_line(place_x-(width/2)+width/4 + animate, place_y-(height/2)+height-(height/3), place_x-(width/2)+width-(width/4) + animate, place_y-(height/2)+height-(height/3), colorU, 5);
+}
+
+void list_box()
+{
+    al_draw_filled_rectangle(75, 75, 775, 575, al_map_rgb(12, 83, 95));// rgb(51, 102, 153)
+
+    for(int i=0; i < 475; i+=25)
+    {
+        al_draw_line(100, 100+i, 740, 100+i, al_map_rgb(255, 255, 255), 1);
+    }
+    //al_draw_filled_rectangle(750, 75, 775, 575, al_map_rgb(51, 102, 153));
+    al_draw_line(757, 100, 757, 550, al_map_rgb(255, 255, 255), 1);
+    al_draw_filled_rounded_rectangle(754, 100, 760, 200, 2, 2, al_map_rgb(255, 255, 70));
 }
