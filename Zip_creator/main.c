@@ -32,7 +32,7 @@ int main()
     ALLEGRO_FONT *font = al_load_ttf_font("res/L.ttf", 14, 1);
     //ALLEGRO_BITMAP *background = al_load_bitmap("res/background.jpg");
 
-    int x=0, sc_y=0, sc_pointed_y, main_loop = true, menu = 0, scr_prev_pos=0, scroller=1;
+    int x=0, sc_y=0, sc_pointed_y, sc_pointed_y_trigger=0, main_loop = true, menu = 0, scr_prev_pos=0, scroller=1;
     int width=50, height=50, place_x=25, place_y=25, animate = 0;
     //enum {};
 
@@ -97,23 +97,30 @@ int main()
 
         }
 
-        if(event.mouse.x >= 753 && event.mouse.x <= 761 && event.mouse.y >= 100 && event.mouse.y <= 550)
+        if(event.mouse.x >= 753 && event.mouse.x <= 761 && event.mouse.y >= 100+sc_y && event.mouse.y <= 200+sc_y)
             {
+
                 if(event.mouse.button == 1)
                 {
                     scroller = 1;
-                    sc_pointed_y = event.mouse.y;
 
+                    if(sc_pointed_y_trigger == 1)
+                    {
+                        sc_pointed_y = event.mouse.y;
+                        sc_pointed_y_trigger = 0;
+                    }
                 }
+
                 if(scroller)
                 {
-                    sc_y = (event.mouse.y - sc_pointed_y);
+                    sc_y = (event.mouse.y - 150);
                 }
             }
 
         else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
         {
             scroller = 0;
+            sc_pointed_y_trigger = 1;
             //scr_prev_pos = event.mouse.y;
         }
 
