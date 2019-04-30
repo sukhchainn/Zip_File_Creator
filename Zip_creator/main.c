@@ -7,7 +7,7 @@
 #include <allegro5/mouse.h>
 
 void menu_icon(int, int, int, int, ALLEGRO_COLOR, int);
-void list_box();
+void list_box(int y);
 
 #define MAXWIDTH 800
 #define MAXHEIGHT 600
@@ -32,7 +32,7 @@ int main()
     ALLEGRO_FONT *font = al_load_ttf_font("res/L.ttf", 14, 1);
     //ALLEGRO_BITMAP *background = al_load_bitmap("res/background.jpg");
 
-    int x=0, y=1, main_loop = true, menu = 0;
+    int x=0, sc_y=0, sc_pointed_y, main_loop = true, menu = 0, scr_prev_pos=0, scroller=1;
     int width=50, height=50, place_x=25, place_y=25, animate = 0;
     //enum {};
 
@@ -62,7 +62,7 @@ int main()
         al_draw_filled_rectangle(0, 50, 50, MAXHEIGHT, al_map_rgb(255, 214, 51)); //rgb(218, 112, 214) rgb(255, 214, 51) al_map_rgb(230, 46, 0)
         al_draw_line(50, 0, 50, MAXHEIGHT, al_map_rgb(0, 0, 0), 1);
         menu_icon(50, 50, 25, 25, al_map_rgb(0, 0, 0), animate);
-        list_box();
+        list_box(sc_y);
 
         if(menu)
         {
@@ -81,14 +81,40 @@ int main()
                     m_color = al_map_rgb(255, 214, 51);
         }
 
-        else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN && event.mouse.x >= (place_x-(width/2)) && event.mouse.x <= (place_x+(width/2)) && event.mouse.y >= (place_y-(height/2)) && event.mouse.y <= (place_y+(height/2)))
+        else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN)
         {
-            if(event.mouse.button == 1)
+            //scr_prev_pos = event.mouse.y;
+
+
+            if(event.mouse.x >= (place_x-(width/2)) && event.mouse.x <= (place_x+(width/2)) && event.mouse.y >= (place_y-(height/2)) && event.mouse.y <= (place_y+(height/2)))
             {
-                (5 == animate) ? (animate = 0) : (animate = 5);
-                menu = !menu;
+                if(event.mouse.button == 1)
+                {
+                    (5 == animate) ? (animate = 0) : (animate = 5);
+                    menu = !menu;
+                }
             }
 
+        }
+
+        if(event.mouse.x >= 753 && event.mouse.x <= 761 && event.mouse.y >= 100 && event.mouse.y <= 550)
+            {
+                if(event.mouse.button == 1)
+                {
+                    scroller = 1;
+                    sc_pointed_y = event.mouse.y;
+
+                }
+                if(scroller)
+                {
+                    sc_y = (event.mouse.y - sc_pointed_y);
+                }
+            }
+
+        else if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+        {
+            scroller = 0;
+            //scr_prev_pos = event.mouse.y;
         }
 
         if(event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -115,7 +141,7 @@ void menu_icon(int width, int height, int place_x, int place_y, ALLEGRO_COLOR co
     al_draw_line(place_x-(width/2)+width/4 + animate, place_y-(height/2)+height-(height/3), place_x-(width/2)+width-(width/4) + animate, place_y-(height/2)+height-(height/3), colorU, 5);
 }
 
-void list_box()
+void list_box(int y)
 {
     al_draw_filled_rectangle(75, 75, 775, 575, al_map_rgb(12, 83, 95));// rgb(51, 102, 153)
 
@@ -125,5 +151,6 @@ void list_box()
     }
     //al_draw_filled_rectangle(750, 75, 775, 575, al_map_rgb(51, 102, 153));
     al_draw_line(757, 100, 757, 550, al_map_rgb(255, 255, 255), 1);
-    al_draw_filled_rounded_rectangle(754, 100, 760, 200, 2, 2, al_map_rgb(255, 255, 70));
+    al_draw_filled_rounded_rectangle(754, 100+y, 760, 200+y, 2, 2, al_map_rgb(255, 255, 70));
+
 }
