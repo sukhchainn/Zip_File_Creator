@@ -5,9 +5,9 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/keyboard.h>
 #include <allegro5/mouse.h>
+#include "Text_Box.h"
 
 void menu_icon(int, int, int, int, ALLEGRO_COLOR, int);
-void list_box(int y);
 
 #define MAXWIDTH 800
 #define MAXHEIGHT 600
@@ -31,6 +31,7 @@ int main()
     ALLEGRO_COLOR m_color = al_map_rgb(255, 214, 51);
     ALLEGRO_FONT *font = al_load_ttf_font("res/L.ttf", 14, 1);
     //ALLEGRO_BITMAP *background = al_load_bitmap("res/background.jpg");
+
 
     int x=0, sc_y=0, sc_pointed_y, sc_pointed_y_trigger=0, main_loop = true, menu = 0, scr_prev_pos=0, scroller=1;
     int width=50, height=50, place_x=25, place_y=25, animate = 0;
@@ -86,7 +87,10 @@ int main()
             //scr_prev_pos = event.mouse.y;
 
 
-            if(event.mouse.x >= (place_x-(width/2)) && event.mouse.x <= (place_x+(width/2)) && event.mouse.y >= (place_y-(height/2)) && event.mouse.y <= (place_y+(height/2)))
+            if(event.mouse.x >= (place_x-(width/2))
+            && event.mouse.x <= (place_x+(width/2))
+            && event.mouse.y >= (place_y-(height/2))
+            && event.mouse.y <= (place_y+(height/2)))
             {
                 if(event.mouse.button == 1)
                 {
@@ -113,7 +117,8 @@ int main()
 
                 if(scroller)
                 {
-                    sc_y = (event.mouse.y - 150);
+                    //if((event.mouse.y - 150) < 550 && (event.mouse.y - 150) > 100)
+                        sc_y = event.mouse.y - 150;
                 }
             }
 
@@ -148,16 +153,5 @@ void menu_icon(int width, int height, int place_x, int place_y, ALLEGRO_COLOR co
     al_draw_line(place_x-(width/2)+width/4 + animate, place_y-(height/2)+height-(height/3), place_x-(width/2)+width-(width/4) + animate, place_y-(height/2)+height-(height/3), colorU, 5);
 }
 
-void list_box(int y)
-{
-    al_draw_filled_rectangle(75, 75, 775, 575, al_map_rgb(12, 83, 95));// rgb(51, 102, 153)
 
-    for(int i=0; i < 475; i+=25)
-    {
-        al_draw_line(100, 100+i, 740, 100+i, al_map_rgb(255, 255, 255), 1);
-    }
-    //al_draw_filled_rectangle(750, 75, 775, 575, al_map_rgb(51, 102, 153));
-    al_draw_line(757, 100, 757, 550, al_map_rgb(255, 255, 255), 1);
-    al_draw_filled_rounded_rectangle(754, 100+y, 760, 200+y, 2, 2, al_map_rgb(255, 255, 70));
 
-}
