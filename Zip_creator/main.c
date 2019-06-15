@@ -9,7 +9,7 @@
 
 void menu_icon(int, int, int, int, ALLEGRO_COLOR, int);
 
-#define MAXWIDTH 800
+#define MAXWIDTH 900
 #define MAXHEIGHT 600
 
 int main()
@@ -30,6 +30,7 @@ int main()
     ALLEGRO_TIMER *timer = al_create_timer(2.0/60.0);
     ALLEGRO_COLOR m_color = al_map_rgb(255, 214, 51);
     ALLEGRO_FONT *font = al_load_ttf_font("res/L.ttf", 14, 1);
+    LIST_BOX list_box = bt_create_list_box(75, 75, 800, 500, al_map_rgb(12, 83, 95), al_map_rgb(155, 155, 155), al_map_rgb(255, 255, 70), al_map_rgb(255, 255, 255));
     //ALLEGRO_BITMAP *background = al_load_bitmap("res/background.jpg");
 
 
@@ -63,12 +64,12 @@ int main()
         al_draw_filled_rectangle(0, 50, 50, MAXHEIGHT, al_map_rgb(255, 214, 51)); //rgb(218, 112, 214) rgb(255, 214, 51) al_map_rgb(230, 46, 0)
         al_draw_line(50, 0, 50, MAXHEIGHT, al_map_rgb(0, 0, 0), 1);
         menu_icon(50, 50, 25, 25, al_map_rgb(0, 0, 0), animate);
-        list_box(sc_y);
+        bt_draw_list_box(list_box); //list_box(sc_y);
 
-        if(menu)
-        {
-            al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(22, 88, 110));
-        }
+            if(menu)
+            {
+                al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(22, 88, 110));
+            }
 
         al_flip_display();
         al_rest(0.02);
@@ -139,7 +140,9 @@ int main()
             }
         }
 
+    list_box = bt_list_box_listener(event, list_box);
     }
+
 
     al_destroy_display(display);
     al_destroy_event_queue(queue);
