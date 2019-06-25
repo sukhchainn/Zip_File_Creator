@@ -66,10 +66,10 @@ int main()
         menu_icon(50, 50, 25, 25, al_map_rgb(0, 0, 0), animate);
         bt_draw_list_box(list_box); //list_box(sc_y);
 
-            if(menu)
-            {
-                al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(22, 88, 110));
-            }
+        if(menu)
+        {
+            al_draw_filled_rectangle(50, 0, MAXWIDTH, 50, al_map_rgb(22, 88, 110));
+        }
 
         al_flip_display();
         al_rest(0.02);
@@ -119,7 +119,7 @@ int main()
                 if(scroller)
                 {
                     //if((event.mouse.y - 150) < 550 && (event.mouse.y - 150) > 100)
-                        sc_y = event.mouse.y - 150;
+                        sc_y = event.mouse.y - sc_pointed_y;
                 }
             }
 

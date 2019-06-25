@@ -17,6 +17,7 @@ typedef struct SCROLLER
     char flag;
     long from_y;
     int ordinate;
+    int prev_ordinate;
 
 } SCROLLER;
 

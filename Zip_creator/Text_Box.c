@@ -84,6 +84,7 @@ SCROLLER create_scroller(int x, int y, int width, int height
     scroll.flag = 0;
     scroll.from_y = 0;
     scroll.ordinate = 0;
+    scroll.prev_ordinate = 0;
 
     // Scroller button information
     scroll.x1 = scroll.x + 10;
@@ -109,10 +110,10 @@ void draw_scroller(SCROLLER scroll)
 // Listen to the ALLEGRO_EVENT (for scroller)
 SCROLLER scroller_listener(ALLEGRO_EVENT event, SCROLLER scroll)
 {
-
     if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN){
         if(event.mouse.x > scroll.x1 && event.mouse.x < scroll.x2 &&
-           event.mouse.y > scroll.y1 && event.mouse.y < scroll.y2 && scroll.flag == 0)
+           event.mouse.y > scroll.y1+scroll.ordinate && event.mouse.y < scroll.y2+scroll.ordinate &&
+            scroll.flag == 0)
            {
             scroll.flag = 1;
             scroll.from_y = event.mouse.y;
@@ -120,11 +121,12 @@ SCROLLER scroller_listener(ALLEGRO_EVENT event, SCROLLER scroll)
     }
 
     if(scroll.flag == 1)
-        scroll.ordinate = event.mouse.y - scroll.from_y;
+        scroll.ordinate = scroll.prev_ordinate + event.mouse.y - scroll.from_y;
 
-    if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+    if(event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
         scroll.flag = 0;
-
+        scroll.prev_ordinate = scroll.ordinate;
+    }
 
     return scroll;
 }
